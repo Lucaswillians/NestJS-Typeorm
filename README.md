@@ -185,3 +185,24 @@ Com isso, foi criado um produto novo, com as características e imagens sendo ar
 - Fazendo isso, eu torno possível o acesso das tabelas do banco de dados, nos módulos, como no módulo do controller, e do provider (service)
 - Uma coisa importante a se dizer, o que torna possível realizar os update, delete, save e etc nos service, é o `Repository` do typeorm, com ele isso se torna possível, mas para que eu consiga acessar as tabelas e realizar esses feitos nas tabelas, so funciona se passarmos o `imports` e realizarmos o padrão acima.
 
+## Rodando o Projeto com Docker
+
+### 1. **Clone o repositório e instale as dependências**
+
+```bash
+npm install
+```
+
+Para rodar o docker com o banco de dados Postgres, fazendo rodar o banco na url: http://localhost:8081
+```bash
+  docker compose up -d
+```
+
+Para rodar o servidor
+```bash
+  npm run start:dev
+```
+
+
+
+
