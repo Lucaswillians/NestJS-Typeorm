@@ -13,10 +13,11 @@ import { AtualizaProdutoDTO } from './dto/atualizaProduto.dto';
 import { CriaProdutoDTO } from './dto/CriaProduto.dto';
 import { ProdutoEntity } from './produto.entity';
 import { ProdutoRepository } from './produto.repository';
+import { ProdutoService } from './produto.service';
 
 @Controller('produtos')
 export class ProdutoController {
-  constructor(private readonly produtoRepository: ProdutoRepository) {}
+  constructor(private readonly produtoService: ProdutoService) {}
 
   @Post()
   async criaNovo(@Body() dadosProduto: CriaProdutoDTO) {
@@ -30,15 +31,14 @@ export class ProdutoController {
     produto.descricao = dadosProduto.descricao;
     produto.categoria = dadosProduto.categoria;
     produto.caracteristicas = dadosProduto.caracteristicas;
-    produto.imagens = dadosProduto.imagens;
+    produto.produtoImagem = dadosProduto.imagens;
 
-    const produtoCadastrado = this.produtoRepository.salva(produto);
-    return produtoCadastrado;
+    return this.produtoService.criaProduto(produto);
   }
 
   @Get()
   async listaTodos() {
-    return this.produtoRepository.listaTodos();
+    return this.produtoService.listaProdutos();
   }
 
   @Put('/:id')
@@ -46,7 +46,7 @@ export class ProdutoController {
     @Param('id') id: string,
     @Body() dadosProduto: AtualizaProdutoDTO,
   ) {
-    const produtoAlterado = await this.produtoRepository.atualiza(
+    const produtoAlterado = await this.produtoService.atualizaProduto(
       id,
       dadosProduto,
     );
@@ -59,7 +59,7 @@ export class ProdutoController {
 
   @Delete('/:id')
   async remove(@Param('id') id: string) {
-    const produtoRemovido = await this.produtoRepository.remove(id);
+    const produtoRemovido = await this.produtoService.deletaProduto(id);
 
     return {
       mensagem: 'produto removido com sucesso',
