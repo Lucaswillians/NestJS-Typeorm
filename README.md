@@ -193,7 +193,7 @@ Com isso, foi criado um produto novo, com as características e imagens sendo ar
 npm install
 ```
 
-Para rodar o docker com o banco de dados Postgres, fazendo rodar o banco na url: http://localhost:8081
+Para rodar o docker com o banco de dados, fazendo rodar o banco na url do pgAdmin 4: http://localhost:8081
 ```bash
   docker compose up -d
 ```
